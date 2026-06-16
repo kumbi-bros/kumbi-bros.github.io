@@ -6,7 +6,6 @@
     <title>Kumbi Bros</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-    <link href="https://fonts.cdnfonts.com/css/super-mario-256" rel="stylesheet">
     <style>
         /* Retro 8-bit Theme Styles */
         body {
@@ -39,8 +38,8 @@
             background-color: #F8D8A0; /* Mushroom/Block color */
             transition: transform 0.1s ease;
             cursor: pointer;
-            text-decoration: none;
-            color: inherit;
+            text-decoration: none; /* For when card is an <a> tag */
+            display: flex;
         }
 
         .card:active {
@@ -125,45 +124,6 @@
             from { transform: translateX(-200px); }
             to { transform: translateX(100vw); }
         }
-
-        /* Modern Mario Logo Font */
-        .mario-logo {
-            font-family: 'Super Mario 256', sans-serif;
-            -webkit-text-stroke: 4px #000; /* Deep black border around letters */
-            color: white; 
-            /* Continuous 3D solid block shadow matching the reference */
-            text-shadow: 
-                1px 1px 0 #000, 2px 2px 0 #000, 3px 3px 0 #000, 4px 4px 0 #000,
-                5px 5px 0 #000, 6px 6px 0 #000, 7px 7px 0 #000, 8px 8px 0 #000,
-                9px 9px 0 #000, 10px 10px 0 #000, 11px 11px 0 #000, 12px 12px 0 #000,
-                13px 13px 0 #000, 14px 14px 0 #000, 15px 15px 0 #000, 16px 16px 0 #000,
-                17px 17px 0 #000, 18px 18px 0 #000, 19px 19px 0 #000, 20px 20px 0 #000,
-                21px 21px 0 #000, 22px 22px 0 #000, 23px 23px 0 #000, 24px 24px 0 #000;
-            line-height: 0.72 !important; /* Tightly stacks the rows safely */
-            transform: rotate(-3deg); /* Matching the slight tilt from the image */
-            display: inline-block;
-            letter-spacing: -0.08em; /* TIGHTENS THE GAPS BETWEEN LETTERS */
-            padding-bottom: 24px; /* Prevents the 3D shadow from clipping */
-        }
-
-        /* Adjust stroke & shadow for smaller screens */
-        @media (max-width: 640px) {
-            .mario-logo {
-                -webkit-text-stroke: 2px #000;
-                letter-spacing: -0.06em;
-                line-height: 0.75 !important; /* Adjusted slightly for mobile overlap */
-                padding-bottom: 12px;
-                text-shadow: 
-                    1px 1px 0 #000, 2px 2px 0 #000, 3px 3px 0 #000, 4px 4px 0 #000,
-                    5px 5px 0 #000, 6px 6px 0 #000, 7px 7px 0 #000, 8px 8px 0 #000,
-                    9px 9px 0 #000, 10px 10px 0 #000, 11px 11px 0 #000, 12px 12px 0 #000;
-            }
-        }
-
-        /* Title shadow (Legacy) */
-        .title-shadow {
-            text-shadow: 4px 4px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 0px 4px 0 #000;
-        }
     </style>
 </head>
 <body>
@@ -197,15 +157,14 @@
     </div>
 
     <!-- HUD Overlay -->
-    <header class="w-full flex justify-between p-6 sm:px-12 z-10 text-[10px] sm:text-sm lg:text-base hud-text leading-loose">
+    <header class="w-full flex justify-between p-6 sm:px-12 z-10 text-[10px] sm:text-sm lg:text-base hud-text leading-loose relative">
         <div class="text-center">
             <p>TEAM</p>
-            <p>000000</p>
+            <p>000009</p>
         </div>
-        <!-- Removed "hidden sm:block" so it stays visible on phones! -->
-        <div class="text-center">
+        <div class="text-center hidden sm:block">
             <p>COINS</p>
-            <p class="text-[#fc9838]">x99</p>
+            <p class="text-[#fc9838]">x69</p>
         </div>
         <div class="text-center">
             <p>WORLD</p>
@@ -218,16 +177,13 @@
     </header>
 
     <!-- Main Content -->
-    <main class="flex-grow z-10 flex flex-col items-center pt-8 pb-16 px-4">
+    <main class="flex-grow z-10 flex flex-col items-center pt-8 pb-16 px-4 relative">
         
-        <!-- KUMBI BROS Logo -->
-        <div class="text-center mb-12 mt-4">
-            <h1 class="text-7xl sm:text-9xl mb-4 mario-logo">
-                <span style="color: #049CD8;">K</span><span style="color: #FBD000;">U</span><span style="color: #E52521;">M</span><span style="color: #43B047;">B</span><span style="color: #FBD000;">I</span>
-                <br />
-                <span style="color: #E52521;">B</span><span style="color: #FBD000;">R</span><span style="color: #E52521;">O</span><span style="color: #43B047;">S</span>
+        <div class="text-center mb-12">
+            <h1 class="text-white text-3xl sm:text-5xl mb-4" style="text-shadow: 4px 4px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000;">
+                PLAYER SELECT
             </h1>
-            <p class="text-white text-xs sm:text-sm animate-pulse hud-text mt-6" style="font-family: 'Press Start 2P', cursive;">CHOOSE YOUR CHARACTER!</p>
+            <p class="text-white text-xs sm:text-sm animate-pulse hud-text">CHOOSE YOUR CHARACTER!</p>
         </div>
 
         <!-- Cards Container (Populated by JS) -->
@@ -237,57 +193,14 @@
 
     </main>
 
-    <!-- Background Scenery (Hills & Bushes) -->
-    <div class="w-full relative pointer-events-none z-0" style="height: 0;">
-        <!-- Scenery Container: Replicates the exact spacing of World 1-1 reference -->
-        <div class="absolute bottom-0 left-0 w-[1400px] xl:w-full h-[150px]">
-            
-            <!-- 1. Large Mountain (Far Left) -->
-            <div class="absolute bottom-0 left-[2%] w-[180px] h-[90px] sm:w-[216px] sm:h-[108px]">
-                <svg viewBox="0 0 64 32" xmlns="http://www.w3.org/2000/svg" style="image-rendering: pixelated; width: 100%; height: 100%;">
-                    <path d="M30 0h4v2h6v2h6v2h4v2h4v2h2v4h2v4h2v14h-60v-14h2v-4h2v-4h2v-2h4v-2h4v-2h6v-2h6v-2z" fill="#000"/>
-                    <path d="M30 2h4v2h6v2h6v2h4v2h4v2h2v4h2v4h2v12h-56v-12h2v-4h2v-4h2v-2h4v-2h4v-2h6v-2h6v-2z" fill="#28B800"/>
-                    <path d="M30 2h4v2h-4z M34 4h6v2h-6z M40 6h6v2h-6z M46 8h4v2h-4z M50 10h4v2h-4z M54 12h2v4h-2z M56 16h2v4h-2z M58 20h2v10h-2z M4 20h2v10h-4z M6 16h2v4h-2z M8 12h2v4h-2z M10 10h4v2h-4z M14 8h4v2h-4z M18 6h6v2h-6z M24 4h6v2h-6z" fill="#78F858"/>
-                </svg>
-            </div>
-
-            <!-- 2. Triple Bush (Middle) -->
-            <div class="absolute bottom-0 left-[45%] w-[180px] h-[45px] sm:w-[216px] sm:h-[54px]">
-                <!-- Custom SVG exactly matching the classic 5-bump Triple Bush -->
-                <svg viewBox="0 0 64 16" xmlns="http://www.w3.org/2000/svg" style="image-rendering: pixelated; width: 100%; height: 100%;">
-                    <path d="M12 0 h8 v2 h8 v-2 h8 v2 h8 v-2 h8 v2 h4 v2 h4 v2 h2 v8 h-2 v2 h-56 v-2 h-2 v-8 h2 v-2 h4 v-2 h4 v-2 z" fill="#000"/>
-                    <path d="M12 2 h8 v2 h8 v-2 h8 v2 h8 v-2 h8 v2 h4 v2 h4 v8 h-56 v-8 h4 v-2 h4 v-2 z" fill="#78F858"/>
-                    <path d="M6 12 h52 v2 h-52 z M6 10 h2 v2 h-2 z M16 10 h4 v2 h-4 z M24 10 h2 v2 h-2 z M32 10 h4 v2 h-4 z M40 10 h2 v2 h-2 z M48 10 h4 v2 h-4 z M56 10 h2 v2 h-2 z" fill="#28B800"/>
-                </svg>
-            </div>
-
-            <!-- 3. Small Mountain (Middle-Right) -->
-            <div class="absolute bottom-0 left-[62%] w-[110px] h-[50px] sm:w-[135px] sm:h-[60px]">
-                <svg viewBox="0 0 40 18" xmlns="http://www.w3.org/2000/svg" style="image-rendering: pixelated; width: 100%; height: 100%;">
-                     <path d="M16 0h8v2h4v2h4v2h2v4h2v8H4v-8h2v-4h2v-2h4v-2h4V0z" fill="#000"/>
-                     <path d="M18 2h4v2h4v2h4v2h2v8H8v-8h2v-2h4v-2h4V2z" fill="#28B800"/>
-                     <path d="M18 2h4v2h-4z M22 4h4v2h-4z M26 6h4v2h-4z M30 8h2v2h-2z M32 10h2v6h-2z M6 10h2v6H6z M8 8h2v2H8z M10 6h4v2h-4z M14 4h4v2h-4z" fill="#78F858"/>
-                </svg>
-            </div>
-
-            <!-- 4. Single Bush (Far Right) -->
-            <div class="absolute bottom-0 left-[88%] w-[90px] h-[45px] sm:w-[108px] sm:h-[54px]">
-                <svg viewBox="0 0 32 16" xmlns="http://www.w3.org/2000/svg" style="image-rendering: pixelated; width: 100%; height: 100%;">
-                    <path d="M12 0h8v2h4v2h4v2h2v8h-2v2h-24v-2h-2v-8h2v-2h4v-2h4v-2z" fill="#000"/>
-                    <path d="M12 2h8v2h4v2h4v8h-24v-8h4v-2h4v-2z" fill="#78F858"/>
-                    <path d="M6 12h20v2h-20z M24 10h2v2h-2z M6 10h2v2h-2z M16 10h4v2h-4z" fill="#28B800"/>
-                </svg>
-            </div>
-            
-        </div>
-    </div>
-
     <!-- Ground -->
-    <div class="ground-pattern z-10"></div>
+    <div class="ground-pattern z-10 relative"></div>
 
     <script>
-        /** * EDIT YOUR TEAM MEMBERS HERE 
-         * Add your member details.
+        /** 
+         * EDIT YOUR TEAM MEMBERS HERE 
+         * Replace the 'image' string with a URL to your team member's photo.
+         * The 'instagram' property sets where the card links to.
          */
         const teamMembers = [
             {
@@ -338,21 +251,14 @@
                 image: "static/images/vinod.jpg",
                 instagram: "https://www.instagram.com/_kaipulla._" 
             },
-            {
+             {
                 name: "Balaji",
                 role: "_android_g",
                 image: "static/images/balaji.jpg",
                 instagram: "https://www.instagram.com/_android_g" 
-            }
+            },
+            
         ];
-
-        // Function to shuffle an array (Fisher-Yates algorithm)
-        function shuffleArray(array) {
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
-            }
-        }
 
         // Function to create the HTML for a single member card
         function createCardHTML(member, index) {
@@ -364,21 +270,22 @@
             
             // Check if user provided an image, otherwise use fallback
             const imageUrl = member.image && member.image.trim() !== "" ? member.image : fallbackImage;
+            
+            // Default link if none provided
+            const profileLink = member.instagram || "https://www.instagram.com/no.1_dubakoor";
 
             return `
                 <div class="pop-in" style="animation-delay: ${animationDelay}s;">
-                    <!-- NOTE: Changed from div to anchor tag (<a>) so the whole card is clickable -->
-                    <a href="${member.instagram}" target="_blank" rel="noopener noreferrer" class="card pixel-border p-4 w-full h-full flex flex-col items-center block">
+                    <!-- Card is now an anchor tag to link to Instagram -->
+                    <a href="${profileLink}" target="_blank" rel="noopener noreferrer" class="card pixel-border p-4 w-full h-full flex flex-col items-center">
                         
                         <!-- Image Container -->
                         <div class="image-frame w-40 h-40 sm:w-48 sm:h-48 mb-4 relative">
                             
-                            <!-- Instagram Icon Badge -->
-                            <div class="absolute top-1 right-1 bg-white p-1 rounded z-10 shadow border-2 border-black" style="box-shadow: 2px 2px 0 rgba(0,0,0,0.5);">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-pink-500">
-                                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                            <!-- Instagram Badge Icon -->
+                            <div class="absolute top-2 right-2 bg-white pixel-border flex items-center justify-center w-8 h-8 z-10" title="View Instagram Profile">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5" style="color: #E1306C;">
+                                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.791 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
                                 </svg>
                             </div>
 
@@ -392,7 +299,7 @@
                         </div>
                         
                         <!-- Name & Role -->
-                        <div class="text-center w-full">
+                        <div class="text-center w-full mt-auto">
                             <h2 class="text-black text-sm sm:text-base mb-2 uppercase leading-relaxed">${member.name}</h2>
                             <div class="bg-black text-white text-[8px] sm:text-[10px] p-2 pixel-border">
                                 ${member.role}
@@ -408,16 +315,18 @@
         document.addEventListener('DOMContentLoaded', () => {
             const container = document.getElementById('roster-container');
             
-            // 1. Shuffle the array
-            shuffleArray(teamMembers);
+            // Randomly shuffle the team members (Fisher-Yates algorithm)
+            let shuffledMembers = [...teamMembers];
+            for (let i = shuffledMembers.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffledMembers[i], shuffledMembers[j]] = [shuffledMembers[j], shuffledMembers[i]];
+            }
             
-            // 2. Generate HTML
             let htmlContent = '';
-            teamMembers.forEach((member, index) => {
+            shuffledMembers.forEach((member, index) => {
                 htmlContent += createCardHTML(member, index);
             });
             
-            // 3. Inject into the DOM
             container.innerHTML = htmlContent;
         });
     </script>
